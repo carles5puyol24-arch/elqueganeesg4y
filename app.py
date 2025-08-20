@@ -298,7 +298,7 @@ window.addEventListener("resize", () => {{
   const sx = canvas.width / oldW;
   const sy = canvas.height / oldH;
   balls.forEach(b => {{
-    b.x = Math.max(b.radius, Math.min(canvas.width  - b.radius, b.x * sx));
+    b.x = Math.max(b.radius, Math.min(canvas.width  - b.radius, b.x * 
     b.y = Math.max(b.radius, Math.min(canvas.height - b.radius, b.y * sy));
   }});
 }});
