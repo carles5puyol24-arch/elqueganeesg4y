@@ -2,8 +2,8 @@ import streamlit as st
 import random
 import json
 
-st.set_page_config(page_title="Sorteo Automático 1111", layout="centered")
-st.title("🎮 Sorteo Automático de Seguidores (1111 jugadores)")
+st.set_page_config(page_title="Sorteo Automático 789", layout="centered")
+st.title("🎮 Sorteo Automático de Seguidores (789 jugadores)")
 
 # -----------------------------
 # Generador de nombres estilo Instagram
@@ -28,11 +28,11 @@ def ig_name():
     return base
 
 # -----------------------------
-# Crear 1111 seguidores
+# Crear 789 seguidores
 # -----------------------------
 followers_py = []
 used = set()
-while len(followers_py) < 1111:
+while len(followers_py) < 789:
     n = ig_name()
     if n in used:
         continue
@@ -43,7 +43,7 @@ while len(followers_py) < 1111:
 followers_json = json.dumps(followers_py)
 
 # -----------------------------
-# HTML + JS optimizado para 1111 jugadores
+# HTML + JS optimizado para 789 jugadores con barra degradada
 # -----------------------------
 html = f"""
 <div style="text-align:center;">
@@ -100,15 +100,19 @@ class Ball {{
     ctx.drawImage(this.image, this.x-this.radius, this.y-this.radius, this.radius*2, this.radius*2);
     ctx.restore();
     
-    // Barra de vida encima
+    // Barra de vida degradada
     const barW = this.radius*2;
-    const barH = 3;
+    const barH = 4;
+    const grad = ctx.createLinearGradient(this.x-barW/2, 0, this.x+barW/2, 0);
+    grad.addColorStop(0,"red");
+    grad.addColorStop(0.5,"yellow");
+    grad.addColorStop(1,"lime");
     ctx.fillStyle = "#555";
-    ctx.fillRect(this.x-barW/2, this.y-this.radius-6, barW, barH);
-    ctx.fillStyle = "lime";
-    ctx.fillRect(this.x-barW/2, this.y-this.radius-6, barW*(this.life/10), barH);
+    ctx.fillRect(this.x-barW/2, this.y-this.radius-8, barW, barH);
+    ctx.fillStyle = grad;
+    ctx.fillRect(this.x-barW/2, this.y-this.radius-8, barW*(this.life/10), barH);
     ctx.strokeStyle = "#000";
-    ctx.strokeRect(this.x-barW/2, this.y-this.radius-6, barW, barH);
+    ctx.strokeRect(this.x-barW/2, this.y-this.radius-8, barW, barH);
   }}
   update(dt) {{
     let speedFactor = 1;
@@ -233,6 +237,7 @@ start();
 
 window.addEventListener("resize",()=>{{
   const oldW=canvas.width, oldH=canvas.height;
+  sizeCanvas();
   const sx=canvas.width/oldW, sy=canvas.height/oldH;
   balls.forEach(b=>{{b.x=Math.max(b.radius,Math.min(canvas.width-b.radius,b.x*sx)); b.y=Math.max(b.radius,Math.min(canvas.height-b.radius,b.y*sy));}});
 }});
